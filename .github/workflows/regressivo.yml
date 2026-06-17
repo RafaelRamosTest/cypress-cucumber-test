@@ -1,0 +1,22 @@
+name: 📅 Testes Regressivos Diários (Completo)
+
+on:
+  schedule:
+      # 🇧🇷 Executa às 12:00 (Meio-dia) no Horário de Brasília (15:00 UTC)
+      # Roda de segunda a sexta-feira
+    - cron: '0 15 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  regressivo-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+      - name: Rodar todos os testes do projeto
+        uses: cypress-io/github-action@v6
+        with:
+          command: npm run cypress:run
