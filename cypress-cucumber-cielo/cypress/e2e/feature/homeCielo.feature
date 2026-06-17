@@ -2,7 +2,7 @@
 Feature: Acessar site Cielo
   
 @bannerHome 
-Scenario: Acessar a home da Cielo e validar informações do banner
+Scenario: Acessar a home da Cielo e validar informacoes do banner
    Given eu acesso o site Cielo
    Then o banner deve exibir o título principal "A maquininha que faz mais, por muito menos"
    And eu devo visualizar o banner
