@@ -1,0 +1,39 @@
+name: Execução de Testes E2E - Cielo 🚀
+
+# Define quando o pipeline será executado
+on:
+  push:
+    branches: [ "main", "master" ] # Roda sempre que você enviar código para essas branches
+  pull_request:
+    branches: [ "main", "master" ] # Roda quando alguém abrir um Pull Request
+
+jobs:
+  tests-e2e:
+    runs-on: ubuntu-latest # Usa uma máquina Linux gratuita do GitHub
+
+    steps:
+      # 1. Faz o download do código do seu repositório para a máquina virtual
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # 2. Configura o Node.js na máquina (usando a versão do seu projeto)
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24 # Alinhe com a versão do Node que você usa localmente
+          cache: 'npm'
+
+      # 3. Instala as dependências do package.json e roda os testes do Cypress
+      # O próprio componente 'cypress-io/github-action' gerencia o cache e a execução de forma otimizada
+      - name: Instalar dependências e Rodar Testes Cypress
+        uses: cypress-io/github-action@v6
+        with:
+          command: npm run cypress:run # O comando em modo headless que criamos no package.json
+
+      # 4. (Opcional) Salva os prints de tela caso algum teste falhe
+      - name: Salvar Screenshots em caso de falha
+        uses: actions/upload-artifact@v4
+        if: failure() # Só executa esse passo se o passo anterior (testes) falhar
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots

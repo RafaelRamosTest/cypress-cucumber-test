@@ -1,0 +1,28 @@
+{
+  "name": "cypress-cucumber-cielo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cross-env ESBUILD_WORKER_THREADS=0 cypress open",
+    "cypress:run": "cross-env ESBUILD_WORKER_THREADS=0 cypress run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^24.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
+    "@cypress/browserify-preprocessor": "^3.0.2",
+    "cross-env": "^10.1.0",
+    "cypress": "^15.17.0",
+    "esbuild": "^0.28.0",
+    "tsx": "^4.22.4"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": [
+      "cypress/e2e/step_definitions/**/*.{js,ts}"
+    ]
+  }
+}
