@@ -6,7 +6,7 @@ on:
     branches: [ "main", "master" ] # Roda sempre que você enviar código para essas branches
   pull_request:
     branches: [ "main", "master" ] # Roda quando alguém abrir um Pull Request
-  workflow_dispatch: # Permite que você rode o pipeline manualmente pelo site do GitHub
+  workflow_dispatch: # Permite rodar manualmente pelo botão no site do GitHub
 
 jobs:
   tests-e2e:
@@ -17,28 +17,23 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      # 2. Configura o Node.js na máquina (usando a versão do seu projeto)
-      # Adicionado o caminho correto para o cache procurar o package-lock.json na subpasta
+      # 2. Configura o Node.js e gerencia o cache do npm automaticamente na raiz
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24 # Alinhe com a versão do Node que você usa localmente
+          node-version: 24
           cache: 'npm'
-          cache-dependency-path: cypress-cucumber-test/package-lock.json
 
-      # 3. Instala as dependências do package.json e roda os testes do Cypress
-      # Adicionado o 'working-directory' para o Cypress saber onde rodar o comando
+      # 3. Instala as dependências e roda os testes do Cypress (tudo na raiz)
       - name: Instalar dependências e Rodar Testes Cypress
         uses: cypress-io/github-action@v6
         with:
-          command: npm run cypress:run # O comando em modo headless que criamos no package.json
-          working-directory: cypress-cucumber-test
+          command: npm run cypress:run
 
-      # 4. (Opcional) Salva os prints de tela caso algum teste falhe
-      # Adicionado o caminho correto da subpasta para capturar os prints do Cypress
+      # 4. Salva os prints de tela na rota padrão caso algum teste falhe
       - name: Salvar Screenshots em caso de falha
         uses: actions/upload-artifact@v4
-        if: failure() # Só executa esse passo se o passo anterior (testes) falhar
+        if: failure()
         with:
           name: cypress-screenshots
-          path: cypress-cucumber-test/cypress/screenshots
+          path: cypress/screenshots
