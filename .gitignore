@@ -33,6 +33,7 @@ Desktop.ini
 # Configurações de IDEs (Opcional, mas recomendado)
 .vscode/
 .idea/
+.continue/*
 *.suo
 *.ntvs*
 *.njsproj

@@ -16,7 +16,7 @@
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
     "@cypress/browserify-preprocessor": "^3.0.2",
     "cross-env": "^10.1.0",
-    "cypress": "^15.17.0",
+    "cypress": "^13.17.0",
     "esbuild": "^0.28.0",
     "tsx": "^4.22.4"
   },
