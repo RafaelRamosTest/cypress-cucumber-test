@@ -3,5 +3,5 @@
 
 beforeEach(() => {
   // Executa antes de cada cenário de teste (opcional)
-  cy.log('Iniciando teste no Mercado Livre...');
+  cy.log('Iniciando teste site Cielo...');
 });

@@ -33,9 +33,11 @@ Desktop.ini
 # Configurações de IDEs (Opcional, mas recomendado)
 .vscode/
 .idea/
-.continue/*
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Extensão Continue (IA) e chaves de API
+.continue/
